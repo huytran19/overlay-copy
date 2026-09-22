@@ -1,0 +1,65 @@
+{
+  "name": "overlay-copy",
+  "productName": "Overlay Copy",
+  "version": "1.0.0",
+  "description": "Overlay luon noi tren cung de copy tung dong theo thu tu",
+  "main": "main.js",
+  "author": "huy.tran",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win --x64",
+    "build:mac": "electron-builder --mac --dir"
+  },
+  "devDependencies": {
+    "electron": "^41.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "studio.sun.overlaycopy",
+    "productName": "Overlay Copy",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "macro.js",
+      "codes.js",
+      "preload.js",
+      "renderer/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "OverlayCopy-portable-${version}.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "OverlayCopy-setup-${version}.exe"
+    },
+    "asarUnpack": [
+      "**/node_modules/uiohook-napi/**",
+      "**/node_modules/@jitsi/robotjs/**"
+    ],
+    "npmRebuild": false
+  },
+  "dependencies": {
+    "@jitsi/robotjs": "^0.6.24",
+    "uiohook-napi": "^1.5.5"
+  }
+}

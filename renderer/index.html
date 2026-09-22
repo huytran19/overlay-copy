@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:;" />
+  <title>Overlay Copy</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Thanh tieu de (keo tha cua so) -->
+  <header id="titlebar">
+    <div class="drag-zone">
+      <span class="dot"></span>
+      <span class="title">Overlay Copy</span>
+    </div>
+    <div class="tools">
+      <input id="opacity" type="range" min="30" max="100" value="100" data-i18n-title="tip.opacity" />
+      <button id="btn-macro" class="icon-btn" data-i18n-title="tip.macro">🎬</button>
+      <button id="btn-keys" class="icon-btn" data-i18n-title="tip.settings">⚙️</button>
+      <button id="btn-through" class="icon-btn">👆</button>
+      <button id="btn-pin" class="icon-btn active">📌</button>
+      <button id="btn-min" class="icon-btn" data-i18n-title="tip.minimize">–</button>
+      <button id="btn-close" class="icon-btn danger" data-i18n-title="tip.close">✕</button>
+    </div>
+  </header>
+
+  <!-- MAN HINH 1: NHAP LIEU -->
+  <section id="view-input" class="view">
+    <textarea id="input" data-i18n-ph="input.ph" spellcheck="false"></textarea>
+    <div class="input-bar">
+      <label class="chk">
+        <input type="checkbox" id="line-mode" />
+        <span data-i18n="input.lineMode">Chỉ tách theo dòng</span>
+      </label>
+      <span id="count" class="count"></span>
+    </div>
+    <button id="btn-run" class="primary" data-i18n="input.run" disabled>RUN</button>
+  </section>
+
+  <!-- MAN HINH 2: DANH SACH -->
+  <section id="view-list" class="view hidden">
+    <div class="progress-wrap">
+      <div class="progress-text"><span id="done-count">0</span> / <span id="total-count">0</span></div>
+      <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+    </div>
+
+    <div id="list" class="list"></div>
+
+    <div id="done-banner" class="done-banner hidden">
+      <div class="tick">✓</div>
+      <div class="done-text" data-i18n="list.done">DONE</div>
+      <div class="done-sub" data-i18n="list.doneSub">Đã copy hết tất cả các dòng</div>
+    </div>
+
+    <footer class="footer">
+      <button id="btn-back" class="ghost" data-i18n="list.back">← Sửa</button>
+      <button id="btn-undo" class="ghost" data-i18n="list.undo">↶ Hoàn tác</button>
+      <button id="btn-reset" class="ghost" data-i18n="list.reset">⟳ Làm lại</button>
+    </footer>
+  </section>
+
+  <!-- Bang bao khi dang bat xuyen chuot -->
+  <div id="through-hint" class="through-hint hidden">
+    <span class="ghost-ico">👻</span>
+    <span data-i18n="through.hint">Đang XUYÊN CHUỘT</span>
+    <b id="hint-keys"></b>
+  </div>
+
+  <!-- BANG CAI DAT NANG CAO -->
+  <div id="keys-panel" class="panel hidden">
+    <div class="panel-box">
+      <div class="panel-head">
+        <span data-i18n="panel.title">Cài đặt nâng cao</span>
+        <button id="keys-close" class="icon-btn">✕</button>
+      </div>
+
+      <div class="panel-body">
+        <div class="sec-title" data-i18n="panel.secLang">Ngôn ngữ</div>
+        <div id="lang-switch" class="seg"></div>
+
+        <div class="sec-title" data-i18n="panel.secKeys">Phím tắt toàn cục</div>
+        <p id="panel-note" class="panel-note"></p>
+
+        <div id="keys-list" class="keys-list"></div>
+
+        <div id="keys-msg" class="keys-msg hidden"></div>
+
+        <div class="sec-title" data-i18n="panel.secOpts">Tuỳ chọn</div>
+
+        <label class="opt">
+          <input type="checkbox" id="opt-opacity" />
+          <span><b data-i18n="opt.opacity"></b><i data-i18n="opt.opacity.d"></i></span>
+        </label>
+
+        <label class="opt">
+          <input type="checkbox" id="opt-bounds" />
+          <span><b data-i18n="opt.bounds"></b><i data-i18n="opt.bounds.d"></i></span>
+        </label>
+
+        <label class="opt">
+          <input type="checkbox" id="opt-linemode" />
+          <span><b data-i18n="opt.lineMode"></b><i data-i18n="opt.lineMode.d"></i></span>
+        </label>
+
+        <div class="panel-foot">
+          <button id="keys-reset" class="ghost" data-i18n="panel.resetKeys"></button>
+          <button id="opts-reset" class="ghost" data-i18n="panel.resetOpts"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANG MACRO -->
+  <div id="macro-panel" class="panel hidden">
+    <div class="panel-box">
+      <div class="panel-head">
+        <span data-i18n="macro.title">Macro tự động</span>
+        <button id="macro-close" class="icon-btn">✕</button>
+      </div>
+
+      <div class="panel-body">
+        <div id="macro-na" class="keys-msg err hidden"></div>
+        <div id="macro-perm" class="keys-msg warn hidden"></div>
+        <div id="macro-warn" class="keys-msg warn"></div>
+
+        <div class="macro-bar">
+          <button id="macro-rec" class="primary sm"></button>
+          <span id="macro-count" class="count"></span>
+        </div>
+
+        <div id="macro-hint" class="keys-msg ok hidden"></div>
+
+        <div id="macro-steps" class="macro-steps"></div>
+
+        <div class="macro-bar">
+          <button id="macro-add-paste" class="ghost"></button>
+          <button id="macro-add-code" class="ghost"></button>
+          <button id="macro-add-wait" class="ghost"></button>
+          <button id="macro-clear" class="ghost"></button>
+        </div>
+
+        <label class="macro-gap">
+          <span data-i18n="macro.gap"></span>
+          <input id="macro-gapms" type="number" min="0" max="10000" step="50" value="400" />
+          <b>ms</b>
+        </label>
+
+        <div id="macro-run" class="keys-msg hidden"></div>
+
+        <div class="panel-foot">
+          <button id="macro-play" class="primary"></button>
+          <button id="macro-abort" class="danger-btn hidden"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <div class="resize-grip"></div>
+
+  <script src="i18n.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
