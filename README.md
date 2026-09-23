@@ -20,8 +20,8 @@ npm run build:win
 
 Kết quả nằm trong thư mục `dist/`:
 
-- `OverlayCopy-portable-1.0.0.exe` — chạy trực tiếp, không cần cài đặt
-- `OverlayCopy-setup-1.0.0.exe` — bản cài đặt (chọn được thư mục)
+- `OverlayCopy-portable.exe` — chạy trực tiếp, không cần cài đặt
+- `OverlayCopy-setup.exe` — bản cài đặt (chọn được thư mục)
 
 > Build từ macOS/Linux cần **Wine**. Nếu không có Wine, hãy chạy lệnh trên từ một máy Windows,
 > hoặc dùng GitHub Actions với `runs-on: windows-latest`.

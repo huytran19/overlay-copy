@@ -45,12 +45,12 @@
       ]
     },
     "portable": {
-      "artifactName": "OverlayCopy-portable-${version}.exe"
+      "artifactName": "OverlayCopy-portable.exe"
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
-      "artifactName": "OverlayCopy-setup-${version}.exe"
+      "artifactName": "OverlayCopy-setup.exe"
     },
     "asarUnpack": [
       "**/node_modules/uiohook-napi/**",

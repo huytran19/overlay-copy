@@ -14,8 +14,8 @@ Vào thư mục `dist/`, chọn **1 trong 2 file** dưới đây (chỉ 1, khôn
 
 | File | Dùng khi nào |
 |---|---|
-| **`OverlayCopy-portable-1.0.0.exe`** | Chạy thẳng, không cài đặt. Để trong USB, cắm máy nào chạy máy đó. → **Nên chọn cái này** |
-| `OverlayCopy-setup-1.0.0.exe` | Muốn cài hẳn vào máy, có sẵn shortcut ngoài Desktop và trong Start Menu |
+| **`OverlayCopy-portable.exe`** | Chạy thẳng, không cài đặt. Để trong USB, cắm máy nào chạy máy đó. → **Nên chọn cái này** |
+| `OverlayCopy-setup.exe` | Muốn cài hẳn vào máy, có sẵn shortcut ngoài Desktop và trong Start Menu |
 
 Các file còn lại trong `dist/` (`win-unpacked/`, `.blockmap`, `builder-debug.yml`) **không cần gửi**.
 
@@ -35,14 +35,14 @@ Nếu bắt buộc phải dùng email: nén file thành `.zip` **có đặt mậ
 Trên máy Windows, mở thư mục chứa file, gõ `powershell` vào thanh địa chỉ rồi Enter. Dán lệnh sau:
 
 ```powershell
-Get-FileHash .\OverlayCopy-portable-1.0.0.exe -Algorithm SHA256
+Get-FileHash .\OverlayCopy-portable.exe -Algorithm SHA256
 ```
 
 Dãy ký tự hiện ra phải **khớp đúng** với dãy dưới đây:
 
 ```
-Bản portable : 10460979604604D31F68743F4963D87EA5CF0FE1525FDC1E2FE7975BBE637EB2
-Bản setup    : 4EB9488675288FD9CF254E8C65B3C65B8085350135695538178810A474DF83DA
+Bản portable : 81DB823C75EF3472C93C3BE3394B54E4872F4458A9B0561B940EA99E72CC5B37
+Bản setup    : 6C0FBB9380C930304BE6D6ACA8AD9547F9D26B626AA2E0BBC4187BE8B98A3CC4
 ```
 
 - **Khớp** → file nguyên vẹn, đi tiếp Phần B
@@ -65,7 +65,7 @@ Không thấy ô *Unblock* cũng bình thường — bỏ qua, đi tiếp.
 
 ## Bước 5. Nháy đúp vào file
 
-Nháy đúp chuột vào `OverlayCopy-portable-1.0.0.exe`.
+Nháy đúp chuột vào `OverlayCopy-portable.exe`.
 
 ## Bước 6. Vượt qua màn hình xanh SmartScreen
 
@@ -97,7 +97,7 @@ Chuột phải vào file `.exe` → **Send to** → **Desktop (create shortcut)*
 
 Thay Bước 5–8 ở trên bằng các bước sau:
 
-1. Nháy đúp `OverlayCopy-setup-1.0.0.exe`
+1. Nháy đúp `OverlayCopy-setup.exe`
 2. Vượt màn hình xanh SmartScreen y như **Bước 6**
 3. Chọn thư mục cài — cứ để mặc định là được:
    `C:\Users\<tên bạn>\AppData\Local\Programs\overlay-copy`
